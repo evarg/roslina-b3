@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -42,4 +44,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function containers()
+    {
+        return $this->belongsToMany(Container::class);
+    }
+
+    public function producers()
+    {
+        return $this->belongsToMany(Producer::class);
+    }
+
+    public function places()
+    {
+        return $this->belongsToMany(Place::class);
+    }
+
+    public function seeds()
+    {
+        return $this->belongsToMany(Seed::class);
+    }
+
 }
