@@ -54,15 +54,8 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        $place = Place::find($id);
+        $place = Place::findOrFail($id);
         $place->load(["users", "containers"]);
-
-        if (is_null($place)) {
-            return response()->json([
-                'status' => 'failed',
-                'message' => 'Place is not found!',
-            ], 200);
-        }
 
         $response = [
             'status' => 'success',
